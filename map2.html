@@ -98,7 +98,7 @@
             // add a source of the data and then add the layer out of the source
             map.addSource('covid-count', {
                 type: 'geojson',
-                data: 'covidcounts.geojson'
+                data: 'assets/counts.geojson'
             });
 
             map.addLayer({
@@ -127,9 +127,9 @@
                         'circle-color': {
                             'property': 'cases',
                             'stops': [
-                                [grades[0], colors[0]],
-                                [grades[1], colors[1]],
-                                [grades[2], colors[2]]
+                                [case_num[0], colors[0]],
+                                [case_num[1], colors[1]],
+                                [case_num[2], colors[2]]
                             ]
                         },
                         'circle-stroke-color': 'white',
@@ -141,11 +141,11 @@
             );
 
 
-            // click on tree to view magnitude in a popup
-            map.on('click', 'earthquakes-point', (event) => {
+            // click on tree to view cases in a popup
+            map.on('click', 'covid-count-layer', (event) => {
                 new mapboxgl.Popup()
                     .setLngLat(event.features[0].geometry.coordinates)
-                    .setHTML(`<strong>Magnitude:</strong> ${event.features[0].properties.mag}`)
+                    .setHTML(`<strong>Cases:</strong> ${event.features[0].properties.cases}`)
                     .addTo(map);
             });
 
